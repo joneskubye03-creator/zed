@@ -18,109 +18,110 @@ interface GalleryModal {
   province: Province;
 }
 
+/* ── Province Card ── */
 function ProvinceCard({
-  province,
-  isCenter,
-  onClick,
+  province, isCenter, onClick,
 }: {
-  province: Province;
-  isCenter: boolean;
-  onClick: () => void;
+  province: Province; isCenter: boolean; onClick: () => void;
 }) {
+  const w = isCenter ? 116 : 90;
+  const h = isCenter ? 188 : 162;
   return (
     <motion.div
       whileTap={{ scale: 0.97 }}
-      whileHover={{ scale: 1.03 }}
       onClick={onClick}
       className="relative flex-shrink-0 cursor-pointer rounded-2xl overflow-hidden"
       style={{
-        width: isCenter ? "140px" : "110px",
-        height: isCenter ? "210px" : "185px",
-        background: province.gradient,
+        width: w, height: h,
         boxShadow: isCenter
-          ? `0 0 24px ${province.accentColor}80, 0 8px 32px rgba(0,0,0,0.6)`
-          : "0 4px 16px rgba(0,0,0,0.4)",
+          ? `0 0 20px ${province.accentColor}80, 0 8px 28px rgba(0,0,0,0.6)`
+          : "0 4px 14px rgba(0,0,0,0.4)",
         border: isCenter
           ? `1.5px solid ${province.accentColor}`
-          : "1px solid rgba(255,255,255,0.12)",
-        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          : "1px solid rgba(255,255,255,0.10)",
+        transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)",
         zIndex: isCenter ? 2 : 1,
       }}
     >
-      {/* Book Now button */}
+      {/* Background image */}
+      <img
+        src={province.image}
+        alt={province.name}
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="lazy"
+      />
+
+      {/* Book Now */}
       <div className="absolute top-2 right-2 z-10">
         <button
           data-testid={`book-now-province-${province.id}`}
           onClick={(e) => e.stopPropagation()}
           className="px-2 py-0.5 text-[9px] font-semibold rounded-full"
-          style={{
-            background: "rgba(26,140,26,0.9)",
-            color: "white",
-            border: "1px solid rgba(34,197,94,0.5)",
-          }}
+          style={{ background: "rgba(26,140,26,0.9)", color: "white", border: "1px solid rgba(34,197,94,0.5)" }}
         >
           Book Now
         </button>
       </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)" }} />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)" }} />
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-3">
+      <div className="absolute bottom-0 left-0 right-0 p-2.5">
         {isCenter && (
           <div
-            className="text-[9px] font-semibold mb-1 px-2 py-0.5 rounded-full inline-block"
+            className="text-[8px] font-semibold mb-1 px-1.5 py-0.5 rounded-full inline-block"
             style={{ background: province.accentColor, color: "white" }}
           >
             {province.places[0]?.name}
           </div>
         )}
-        <p className="text-white font-bold text-[11px] leading-tight">{province.name}</p>
-        <p className="text-white/70 text-[9px] mt-0.5">{province.tagline}</p>
+        <p className="text-white font-bold text-[10px] leading-tight">{province.name}</p>
+        <p className="text-white/70 text-[8px] mt-0.5">{province.tagline}</p>
         <div className="flex items-center gap-1 mt-1">
-          <span className="text-white/60 text-[8px]">Tap to view more</span>
-          <ChevronRight className="w-2.5 h-2.5 text-white/60" />
+          <span className="text-white/55 text-[7px]">Tap to view more</span>
+          <ChevronRight className="w-2 h-2 text-white/55" />
         </div>
       </div>
     </motion.div>
   );
 }
 
+/* ── Place Card ── */
 function PlaceCard({
-  place,
-  province,
-  isCenter,
-  onClick,
+  place, province, isCenter, onClick,
 }: {
-  place: Place;
-  province: Province;
-  isCenter: boolean;
-  onClick: () => void;
+  place: Place; province: Province; isCenter: boolean; onClick: () => void;
 }) {
+  const w = isCenter ? 116 : 90;
+  const h = isCenter ? 188 : 162;
   return (
     <motion.div
-      initial={{ scale: 0.4, opacity: 0 }}
+      initial={{ scale: 0.5, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       whileTap={{ scale: 0.97 }}
-      whileHover={{ scale: 1.03 }}
       onClick={onClick}
       className="relative flex-shrink-0 cursor-pointer rounded-2xl overflow-hidden"
       style={{
-        width: isCenter ? "140px" : "110px",
-        height: isCenter ? "210px" : "185px",
-        background: place.gradient,
+        width: w, height: h,
         boxShadow: isCenter
-          ? `0 0 24px ${province.accentColor}80, 0 8px 32px rgba(0,0,0,0.6)`
-          : "0 4px 16px rgba(0,0,0,0.4)",
+          ? `0 0 20px ${province.accentColor}80, 0 8px 28px rgba(0,0,0,0.6)`
+          : "0 4px 14px rgba(0,0,0,0.4)",
         border: isCenter
           ? `1.5px solid ${province.accentColor}`
-          : "1px solid rgba(255,255,255,0.12)",
-        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          : "1px solid rgba(255,255,255,0.10)",
+        transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)",
         zIndex: isCenter ? 2 : 1,
       }}
     >
+      <img
+        src={place.image}
+        alt={place.name}
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="lazy"
+      />
+
       {/* Book Now */}
       <div className="absolute top-2 right-2 z-10">
         <button
@@ -133,53 +134,48 @@ function PlaceCard({
         </button>
       </div>
 
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)" }} />
 
-      <div className="absolute bottom-0 left-0 right-0 p-3">
-        <p className="text-white font-bold text-[11px] leading-tight">{place.name}</p>
-        <p className="text-white/70 text-[9px] mt-0.5">{place.tagline}</p>
+      <div className="absolute bottom-0 left-0 right-0 p-2.5">
+        <p className="text-white font-bold text-[10px] leading-tight">{place.name}</p>
+        <p className="text-white/70 text-[8px] mt-0.5">{place.tagline}</p>
         <div className="flex items-center gap-1 mt-1">
-          <span className="text-white/60 text-[8px]">Tap to view more</span>
-          <ChevronRight className="w-2.5 h-2.5 text-white/60" />
+          <span className="text-white/55 text-[7px]">Tap to view more</span>
+          <ChevronRight className="w-2 h-2 text-white/55" />
         </div>
       </div>
     </motion.div>
   );
 }
 
+/* ── Gallery Modal ── */
 function GalleryModalView({
-  place,
-  province,
-  onClose,
+  place, province, onClose,
 }: {
-  place: Place;
-  province: Province;
-  onClose: () => void;
+  place: Place; province: Province; onClose: () => void;
 }) {
   const [activeImg, setActiveImg] = useState(0);
-  const placeholderImages = [
-    province.gradient,
-    place.gradient,
-    `linear-gradient(135deg, ${province.accentColor} 0%, #0a1a0a 100%)`,
-    `linear-gradient(225deg, ${province.accentColor} 0%, #1a0a2a 100%)`,
-    `linear-gradient(45deg, #0a2a1a 0%, ${province.accentColor} 100%)`,
+  const images = [
+    province.image,
+    place.image,
+    `${province.image}&sig=1`,
+    `${place.image}&sig=2`,
+    `${province.image}&sig=3`,
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveImg((prev) => (prev + 1) % placeholderImages.length);
-    }, 20000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setActiveImg(p => (p + 1) % images.length), 20000);
+    return () => clearInterval(t);
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
+      exit={{ opacity: 0, scale: 0.85 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
       className="fixed inset-0 z-[100] flex items-center justify-center"
-      style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)" }}
+      style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(8px)" }}
       onClick={onClose}
     >
       <motion.div
@@ -188,28 +184,27 @@ function GalleryModalView({
           background: "#0a120a",
           border: "1px solid rgba(255,255,255,0.15)",
           boxShadow: "0 24px 60px rgba(0,0,0,0.8)",
-          maxHeight: "80vh",
+          maxHeight: "82vh",
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Main image area */}
+        {/* Main image */}
         <div className="relative h-64 overflow-hidden">
           <AnimatePresence mode="wait">
-            <motion.div
+            <motion.img
               key={activeImg}
+              src={images[activeImg]}
+              alt={place.name}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="absolute inset-0"
-              style={{ background: placeholderImages[activeImg] }}
+              transition={{ duration: 0.7 }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </AnimatePresence>
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.65) 100%)" }} />
 
-          {/* Overlay controls */}
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%)" }} />
-
-          {/* Top controls */}
+          {/* Controls */}
           <div className="absolute top-3 left-0 right-0 px-4 flex justify-between items-center">
             <button
               onClick={onClose}
@@ -230,7 +225,7 @@ function GalleryModalView({
 
           {/* Dots */}
           <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-            {placeholderImages.map((_, i) => (
+            {images.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActiveImg(i)}
@@ -247,26 +242,19 @@ function GalleryModalView({
 
         {/* Info */}
         <div className="p-4">
-          <div className="flex items-start justify-between mb-2">
-            <div>
-              <h3 className="text-white font-bold text-lg">{place.name}</h3>
-              <div className="flex items-center gap-1 mt-0.5">
-                <MapPin className="w-3 h-3 text-green-400" />
-                <span className="text-white/60 text-xs">{province.name}</span>
-              </div>
-            </div>
+          <h3 className="text-white font-bold text-lg">{place.name}</h3>
+          <div className="flex items-center gap-1 mt-0.5 mb-2">
+            <MapPin className="w-3 h-3 text-green-400" />
+            <span className="text-white/60 text-xs">{province.name}</span>
           </div>
           <p className="text-white/70 text-sm leading-relaxed mb-4">{place.description}</p>
 
           {/* Video placeholder */}
           <div
-            className="rounded-xl p-4 flex items-center gap-3 mb-4"
+            className="rounded-xl p-3 flex items-center gap-3 mb-4"
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
           >
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ background: "#1a8c1a" }}
-            >
+            <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "#1a8c1a" }}>
               <Play className="w-4 h-4 text-white ml-0.5" />
             </div>
             <div>
@@ -275,20 +263,20 @@ function GalleryModalView({
             </div>
           </div>
 
-          {/* Thumbnail strip */}
+          {/* Thumbnails */}
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {placeholderImages.map((grad, i) => (
+            {images.map((src, i) => (
               <button
                 key={i}
                 onClick={() => setActiveImg(i)}
                 className="flex-shrink-0 rounded-lg overflow-hidden"
                 style={{
-                  width: "56px",
-                  height: "40px",
-                  background: grad,
+                  width: "54px", height: "38px",
                   border: i === activeImg ? "2px solid #1a8c1a" : "1px solid rgba(255,255,255,0.1)",
                 }}
-              />
+              >
+                <img src={src} alt="" className="w-full h-full object-cover" />
+              </button>
             ))}
           </div>
         </div>
@@ -297,26 +285,29 @@ function GalleryModalView({
   );
 }
 
+/* ── Home Page ── */
 export default function Home() {
-  const [activeProvinceIdx, setActiveProvinceIdx] = useState(8); // Southern Province default
+  const [activeProvinceIdx, setActiveProvinceIdx] = useState(8); // Southern Province
   const [viewMode, setViewMode] = useState<ViewMode>("provinces");
   const [activePlaceIdx, setActivePlaceIdx] = useState(0);
   const [gallery, setGallery] = useState<GalleryModal | null>(null);
   const [showingPlacesFor, setShowingPlacesFor] = useState<Province | null>(null);
   const [transitioning, setTransitioning] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const activeProvince = orderedProvinces[activeProvinceIdx];
   const currentPlaces = showingPlacesFor?.places ?? [];
+  const displayName = viewMode === "places" && showingPlacesFor
+    ? showingPlacesFor.name
+    : activeProvince.name;
 
   const startAutoSlide = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       if (viewMode === "provinces") {
-        setActiveProvinceIdx((prev) => (prev + 1) % orderedProvinces.length);
+        setActiveProvinceIdx(p => (p + 1) % orderedProvinces.length);
       } else {
-        setActivePlaceIdx((prev) => (prev + 1) % currentPlaces.length);
+        setActivePlaceIdx(p => (p + 1) % Math.max(currentPlaces.length, 1));
       }
     }, 20000);
   }, [viewMode, currentPlaces.length]);
@@ -334,15 +325,14 @@ export default function Home() {
       setViewMode("places");
       setActivePlaceIdx(0);
       setTransitioning(false);
-    }, 400);
+    }, 350);
   };
 
   const handlePlaceCardClick = (place: Place, province: Province) => {
     setGallery({ place, province });
   };
 
-  const handleNavProvinceClick = (province: Province) => {
-    const idx = orderedProvinces.findIndex(p => p.id === province.id);
+  const handleNavProvinceClick = (province: Province, idx: number) => {
     if (viewMode === "places") {
       setTransitioning(true);
       setTimeout(() => {
@@ -350,260 +340,288 @@ export default function Home() {
         setShowingPlacesFor(null);
         setActiveProvinceIdx(idx);
         setTransitioning(false);
-      }, 300);
+      }, 250);
     } else {
       setActiveProvinceIdx(idx);
     }
   };
 
-  const handleNavPlaceClick = (place: Place) => {
-    const idx = currentPlaces.findIndex(p => p.id === place.id);
-    setActivePlaceIdx(idx);
-  };
-
   // Swipe handling
   const touchStartX = useRef(0);
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
   const handleTouchEnd = (e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 35) {
       if (viewMode === "provinces") {
-        setActiveProvinceIdx(prev =>
-          diff > 0
-            ? (prev + 1) % orderedProvinces.length
-            : (prev - 1 + orderedProvinces.length) % orderedProvinces.length
-        );
+        setActiveProvinceIdx(p => diff > 0
+          ? (p + 1) % orderedProvinces.length
+          : (p - 1 + orderedProvinces.length) % orderedProvinces.length);
       } else {
-        setActivePlaceIdx(prev =>
-          diff > 0
-            ? (prev + 1) % currentPlaces.length
-            : (prev - 1 + currentPlaces.length) % currentPlaces.length
-        );
+        setActivePlaceIdx(p => diff > 0
+          ? (p + 1) % currentPlaces.length
+          : (p - 1 + currentPlaces.length) % currentPlaces.length);
       }
     }
   };
 
-  const getCarouselItems = () => {
-    const items = [];
+  // Exactly 3 cards: left (-1), center (0), right (+1)
+  const getThreeCards = () => {
     if (viewMode === "provinces") {
-      const totalCount = orderedProvinces.length;
-      for (let i = -1; i <= 4; i++) {
-        const idx = (activeProvinceIdx + i + totalCount) % totalCount;
-        items.push({ idx: i, province: orderedProvinces[idx], isCenter: i === 0 });
-      }
+      const n = orderedProvinces.length;
+      return [-1, 0, 1].map(offset => ({
+        key: `${offset}`,
+        province: orderedProvinces[(activeProvinceIdx + offset + n) % n],
+        isCenter: offset === 0,
+      }));
     } else {
-      const totalCount = currentPlaces.length;
-      for (let i = -1; i <= 4; i++) {
-        const idx = (activePlaceIdx + i + totalCount) % totalCount;
-        items.push({ idx: i, place: currentPlaces[idx], isCenter: i === 0 });
-      }
+      const n = currentPlaces.length;
+      return [-1, 0, 1].map(offset => ({
+        key: `${offset}`,
+        place: currentPlaces[(activePlaceIdx + offset + n) % n],
+        isCenter: offset === 0,
+      }));
     }
-    return items;
   };
+
+  const activeIdx = viewMode === "provinces" ? activeProvinceIdx : activePlaceIdx;
+  const totalDots = viewMode === "provinces" ? orderedProvinces.length : currentPlaces.length;
 
   return (
-    <div className="flex-1 overflow-hidden relative flex flex-col" style={{ height: "calc(100vh - 0px)" }}>
-      {/* Background with crossfade */}
+    <div className="flex-1 overflow-hidden relative flex flex-col" style={{ height: "100%" }}>
+      {/* Cinematic background */}
       <AnimatePresence mode="sync">
         <motion.div
           key={activeProvince.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 bg-cover bg-center"
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0"
           style={{ backgroundImage: `url(${homeBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
       </AnimatePresence>
-      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(5,15,5,0.75) 40%, rgba(5,15,5,0.92) 100%)" }} />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(5,15,5,0.72) 38%, rgba(5,15,5,0.93) 100%)" }}
+      />
 
-      {/* Header */}
-      <div className="relative z-10 pt-3 px-4">
+      {/* ── HEADER ── */}
+      <div className="relative z-10 pt-10 px-4">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl leading-none" style={{ fontFamily: "'Dancing Script', cursive", color: "white", fontWeight: 700 }}>
-              Zambia Kuchalo
-            </h1>
-            <motion.p
-              key={activeProvince.id}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center text-white/90 text-sm font-semibold mt-0.5 tracking-wide"
-            >
-              {viewMode === "places" && showingPlacesFor ? showingPlacesFor.name : activeProvince.name}
-            </motion.p>
-          </div>
-          <button
-            data-testid="notification-bell"
-            className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}
+          <h1
+            className="text-[22px] leading-none"
+            style={{ fontFamily: "'Dancing Script', cursive", color: "white", fontWeight: 700 }}
           >
-            <Bell className="w-4 h-4 text-white" />
-            <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-green-500" />
-          </button>
+            Zambia Kuchalo
+          </h1>
+          <div className="relative">
+            <button
+              data-testid="notification-bell"
+              className="w-9 h-9 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}
+            >
+              <Bell className="w-4 h-4 text-white" />
+            </button>
+            <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-green-500 border border-black" />
+          </div>
         </div>
 
-        {/* Flag stripes */}
-        <div className="flex h-0.5 mt-2 rounded-full overflow-hidden gap-0.5">
+        {/* Zambia flag stripes */}
+        <div className="flex h-[3px] mt-2 rounded-full overflow-hidden gap-0.5">
           <div className="flex-1 bg-green-600" />
           <div className="flex-1 bg-red-600" />
           <div className="flex-1 bg-black" />
           <div className="flex-1 bg-orange-400" />
         </div>
+
+        {/* Province / place name — centered, between flag and content */}
+        <motion.p
+          key={displayName}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="text-center font-semibold text-white/90 tracking-wide mt-2"
+          style={{ fontSize: "13px" }}
+        >
+          {displayName}
+        </motion.p>
       </div>
 
-      {/* Main content area */}
-      <div className="relative z-10 flex flex-1 mt-2 overflow-hidden">
-        {/* Left navigation */}
-        <div className="w-28 flex-shrink-0 px-2 overflow-y-auto no-scrollbar py-1">
+      {/* ── MAIN CONTENT: left nav + carousel ── */}
+      <div className="relative z-10 flex flex-1 mt-1 overflow-hidden">
+
+        {/* Left vertical navigation */}
+        <div
+          className="flex-shrink-0 overflow-y-auto no-scrollbar py-1 pr-1"
+          style={{ width: "72px" }}
+        >
           <AnimatePresence mode="wait">
             {viewMode === "provinces" ? (
               <motion.div
-                key="province-nav"
-                initial={{ opacity: 0, x: -10 }}
+                key="prov-nav"
+                initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col gap-1.5"
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col gap-[3px] pl-2"
               >
-                {orderedProvinces.map((prov, idx) => (
-                  <button
-                    key={prov.id}
-                    data-testid={`nav-province-${prov.id}`}
-                    onClick={() => handleNavProvinceClick(prov)}
-                    className="flex items-center gap-1.5 text-left rounded-lg px-2 py-1.5 transition-all"
-                    style={{
-                      background: idx === activeProvinceIdx ? "rgba(26,140,26,0.2)" : "transparent",
-                      borderLeft: idx === activeProvinceIdx ? "2px solid #22c55e" : "2px solid transparent",
-                    }}
-                  >
-                    <MapPin
-                      className="w-2.5 h-2.5 flex-shrink-0"
-                      style={{ color: idx === activeProvinceIdx ? "#22c55e" : "rgba(255,255,255,0.4)" }}
-                    />
-                    <span
-                      className="text-[9px] font-medium leading-tight"
-                      style={{ color: idx === activeProvinceIdx ? "#22c55e" : "rgba(255,255,255,0.65)" }}
+                {orderedProvinces.map((prov, idx) => {
+                  const isActive = idx === activeProvinceIdx;
+                  return (
+                    <button
+                      key={prov.id}
+                      data-testid={`nav-province-${prov.id}`}
+                      onClick={() => handleNavProvinceClick(prov, idx)}
+                      className="flex items-center gap-1 text-left py-[3px] transition-all duration-200"
                     >
-                      {prov.name}
-                    </span>
-                  </button>
-                ))}
+                      <MapPin
+                        className="w-2 h-2 flex-shrink-0"
+                        style={{ color: isActive ? "#22c55e" : "rgba(255,255,255,0.35)" }}
+                      />
+                      <span
+                        className="text-[8px] font-medium leading-tight"
+                        style={{ color: isActive ? "#22c55e" : "rgba(255,255,255,0.55)" }}
+                      >
+                        {prov.shortName}
+                      </span>
+                    </button>
+                  );
+                })}
               </motion.div>
             ) : (
               <motion.div
-                key="places-nav"
-                initial={{ opacity: 0, x: -10 }}
+                key="place-nav"
+                initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col gap-1.5"
+                exit={{ opacity: 0, x: -8 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col gap-[3px] pl-2"
               >
                 <button
                   onClick={() => { setViewMode("provinces"); setShowingPlacesFor(null); }}
-                  className="text-[9px] text-white/50 flex items-center gap-1 mb-1 px-2"
+                  className="text-[8px] text-white/45 flex items-center gap-0.5 mb-1"
                 >
                   ← Back
                 </button>
-                <p className="text-[9px] font-bold text-white/40 px-2 mb-1 uppercase tracking-wider">
-                  {showingPlacesFor?.shortName}
-                </p>
-                {currentPlaces.map((place, idx) => (
-                  <button
-                    key={place.id}
-                    data-testid={`nav-place-${place.id}`}
-                    onClick={() => handleNavPlaceClick(place)}
-                    className="flex items-center gap-1.5 text-left rounded-lg px-2 py-1.5 transition-all"
-                    style={{
-                      background: idx === activePlaceIdx ? "rgba(26,140,26,0.2)" : "transparent",
-                      borderLeft: idx === activePlaceIdx ? "2px solid #22c55e" : "2px solid transparent",
-                    }}
-                  >
-                    <MapPin
-                      className="w-2.5 h-2.5 flex-shrink-0"
-                      style={{ color: idx === activePlaceIdx ? "#22c55e" : "rgba(255,255,255,0.4)" }}
-                    />
-                    <span
-                      className="text-[9px] font-medium leading-tight"
-                      style={{ color: idx === activePlaceIdx ? "#22c55e" : "rgba(255,255,255,0.65)" }}
+                {currentPlaces.map((place, idx) => {
+                  const isActive = idx === activePlaceIdx;
+                  return (
+                    <button
+                      key={place.id}
+                      data-testid={`nav-place-${place.id}`}
+                      onClick={() => setActivePlaceIdx(idx)}
+                      className="flex items-center gap-1 text-left py-[3px] transition-all duration-200"
                     >
-                      {place.name}
-                    </span>
-                  </button>
-                ))}
+                      <MapPin
+                        className="w-2 h-2 flex-shrink-0"
+                        style={{ color: isActive ? "#22c55e" : "rgba(255,255,255,0.35)" }}
+                      />
+                      <span
+                        className="text-[8px] font-medium leading-tight"
+                        style={{ color: isActive ? "#22c55e" : "rgba(255,255,255,0.55)" }}
+                      >
+                        {place.name}
+                      </span>
+                    </button>
+                  );
+                })}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Carousel area */}
-        <div className="flex-1 flex flex-col justify-center overflow-hidden">
-          {/* Cards carousel */}
+        {/* Carousel (3 cards) */}
+        <div className="flex-1 flex flex-col items-center justify-center overflow-hidden">
           <div
-            ref={carouselRef}
-            className="relative"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <AnimatePresence mode="wait">
               {!transitioning && (
                 <motion.div
-                  key={viewMode}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center gap-2 pl-2"
-                  style={{ overflowX: "visible" }}
+                  key={`${viewMode}-${activeIdx}`}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-center"
+                  style={{ gap: "6px" }}
                 >
-                  {viewMode === "provinces" ? (
-                    getCarouselItems().map((item: any, i) => (
-                      <ProvinceCard
-                        key={`${item.province.id}-${i}`}
-                        province={item.province}
-                        isCenter={item.isCenter}
-                        onClick={() => handleProvinceCardClick(item.province)}
-                      />
-                    ))
-                  ) : (
-                    getCarouselItems().map((item: any, i) => (
-                      item.place && showingPlacesFor && (
-                        <PlaceCard
-                          key={`${item.place.id}-${i}`}
-                          place={item.place}
-                          province={showingPlacesFor}
+                  {viewMode === "provinces"
+                    ? getThreeCards().map((item: any) => (
+                        <ProvinceCard
+                          key={`prov-${item.province.id}-${item.key}`}
+                          province={item.province}
                           isCenter={item.isCenter}
-                          onClick={() => handlePlaceCardClick(item.place, showingPlacesFor!)}
+                          onClick={() => handleProvinceCardClick(item.province)}
                         />
+                      ))
+                    : getThreeCards().map((item: any) =>
+                        item.place && showingPlacesFor ? (
+                          <PlaceCard
+                            key={`place-${item.place.id}-${item.key}`}
+                            place={item.place}
+                            province={showingPlacesFor}
+                            isCenter={item.isCenter}
+                            onClick={() => handlePlaceCardClick(item.place, showingPlacesFor!)}
+                          />
+                        ) : null
                       )
-                    ))
-                  )}
+                  }
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-1.5 mt-4">
-            {(viewMode === "provinces" ? orderedProvinces : currentPlaces).map((_, i) => (
+          {/* Progress dots */}
+          <div className="flex justify-center gap-1.5 mt-3">
+            {Array.from({ length: totalDots }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-full transition-all"
+                className="rounded-full transition-all duration-300"
                 style={{
-                  width: i === (viewMode === "provinces" ? activeProvinceIdx : activePlaceIdx) ? "16px" : "5px",
-                  height: "5px",
-                  background: i === (viewMode === "provinces" ? activeProvinceIdx : activePlaceIdx)
-                    ? "#22c55e"
-                    : "rgba(255,255,255,0.3)",
+                  width: i === activeIdx ? "14px" : "4px",
+                  height: "4px",
+                  background: i === activeIdx ? "#22c55e" : "rgba(255,255,255,0.28)",
                 }}
               />
             ))}
           </div>
         </div>
       </div>
+
+      {/* Place thumbnails row (when in places view) */}
+      {viewMode === "places" && showingPlacesFor && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="relative z-10 px-4 pb-2"
+        >
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            {currentPlaces.map((place, idx) => (
+              <button
+                key={place.id}
+                onClick={() => setActivePlaceIdx(idx)}
+                className="flex-shrink-0 rounded-lg overflow-hidden"
+                style={{
+                  width: "64px", height: "44px",
+                  border: idx === activePlaceIdx ? "2px solid #22c55e" : "1px solid rgba(255,255,255,0.15)",
+                  position: "relative",
+                }}
+              >
+                <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
+                <div
+                  className="absolute inset-0 flex items-end px-1 pb-0.5"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)" }}
+                >
+                  <span className="text-white text-[6px] font-medium leading-tight line-clamp-1">{place.name}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Gallery Modal */}
       <AnimatePresence>
