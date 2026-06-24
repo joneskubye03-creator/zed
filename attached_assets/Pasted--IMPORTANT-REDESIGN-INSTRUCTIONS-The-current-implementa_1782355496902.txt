@@ -1,0 +1,419 @@
+ 
+
+
+
+IMPORTANT REDESIGN INSTRUCTIONS
+
+The current implementation is not matching the supplied reference designs.
+
+Use the supplied reference images as the exact UI specification.
+
+HEADER
+
+Keep Zambia Kuchalo logo fixed at the top.
+
+The header must never scroll away.
+
+Always visible:
+
+Zambia Kuchalo logo
+
+Current page title
+
+Notification button
+
+HOME PAGE CAROUSEL
+
+The card that comes to the center must highlight in green like in the reference image, it must be at the center, it must not be at the far left like in the reference but it must be at the center.
+
+Province cards must move left and the center card must green highlight every 20 seconds each card must have its turn, each card must be highlighted just like in the reference image, they must move left wards and must remain the same size even as they get highlighted and each card must have the "Book Now button somewhere at the top left of the card.
+
+ 
+
+ 
+
+Move the cards.
+
+Animation:
+
+Auto-slide every 20 seconds
+
+Infinite loop, it must not start over but continue
+
+Smooth easing
+
+User can also swipe manually
+
+PROVINCE SYNCHRONIZATION
+
+When a province card reaches the center highlight:
+
+Update all of the following simultaneously:
+
+Province title in between the left vertical wording and the flag colors and must not be below Zambia Kuchalo like in reference image, the wording must also be centered
+
+Background image
+
+Province name highlighted in left navigation like in the reference image
+
+Examples:
+
+Lusaka Province
+
+Copperbelt Province
+
+central Province
+
+Eastern Province
+
+Luapula Province
+
+Muchinga Province
+
+Northern Province
+
+North Western Province
+
+Southern Province
+
+Western Province. they must be vertically in that order
+
+ 
+ 
+then for the cards and must have a small "Book Now button" at top right corner.:
+ 
+
+Lusaka Province:
+
+Background = Lusaka Skyline
+
+Copperbelt Province:
+
+Background = Copper Mine
+
+central Province:
+
+Background = (you will know what to put there)
+
+Eastern Province:
+
+Background = South Luangwa
+
+Luapula Province:
+
+Background = Lake Mweru
+
+Muchinga Province:
+
+Background = chishimba falls
+
+Northern Province:
+
+Background = Kalambo Falls
+
+North Western Province:
+
+Background = Zambezi river source
+
+Southern Province:
+
+Background = Victoria Falls
+
+Western Province:
+
+Background = Zambezi river. they must be in that order horizontally
+
+ 
+
+
+
+Use smooth crossfade transitions.
+
+DYNAMIC LEFT NAVIGATION
+
+When browsing provinces:
+
+Display province names vertically.
+
+When a province is selected/tapped make sure that it transitions to:
+
+Replace province list with places inside that province.
+
+Example:
+
+Southern Province:
+
+Livingstone
+
+Choma
+
+Mazabuka
+
+Monze
+
+Siavonga
+
+Copperbelt Province:
+
+Chingola
+
+Kitwe
+
+Ndola
+
+Luanshya
+
+Kalulushi
+
+Lusaka Province:
+
+Lusaka
+
+Kafue
+
+Chongwe
+
+Chilanga
+
+Rufunsa
+
+Lower Zambezi National Park
+
+Eastern Province:
+
+Nyimba
+
+Petauke
+
+Chipata
+
+Lundazi
+
+Lukusuzi National Park
+
+Luapula Province:
+
+Mansa
+
+Samfya
+
+Lake mweru
+
+Mununga
+
+Nchelenge
+
+Northern Province:
+
+Kasaba bay
+
+Kasama
+
+Mbala
+
+Luwingu
+
+North Western Province:
+
+West Luangwa National Park
+
+Ikelenge
+
+Solwezi
+
+Kasempa
+
+Mufumbwe
+
+Nuchinga Province:
+
+Mpika
+
+Chinsali
+
+South Luangwa National Park
+
+Chilonga
+
+Chandesi
+
+Western Province:
+
+Mongu
+
+Zambezi
+
+Senanga
+
+Kalabo
+
+Kaoma
+
+central Province:
+
+Kabwe
+
+Chipepo
+
+Kaphiri Mposhi
+
+Chibombo
+
+Chisamba
+
+Mumbwa
+
+Serenje
+
+The left navigation must always match the cards being displayed.
+
+PROVINCE EXPANSION
+
+When a province card is tapped:
+
+Province cards must fade away.
+
+Place cards animate out from the selected province card.
+
+Animation:
+
+Scale 0.4
+
+Fade in
+
+Expand
+
+Move into final positions
+
+The transition should feel premium like Apple Wallet.
+
+PLACE CAROUSEL
+
+Place cards must also:
+
+Auto-slide every 20 seconds
+
+Support manual swiping
+
+The center card must still highlight
+
+When center place changes:
+
+Update left navigation highlight.
+
+FULL SCREEN GALLERY
+
+When a place card is tapped:
+
+Expand into full-screen modal and must have the "Book Now button" at top right corner.
+
+Display images and videos, for videos you can just add a placeholder for them.
+
+Auto-slide every 20 seconds.
+
+Pause on user interaction.
+
+Close methods:
+
+X button
+
+Tap outside modal, each place when it expands it must have atleast 5 ai images and must also allow videos you can create a place holder for videos.
+
+Closing animation must return to originating card.
+
+CARD SIZE
+
+Reduce card size significantly.
+
+Home page must display:
+
+Four visible cards and must have a small "Book Now button" at top right corner.
+
+Full bottom navigation, make sure the navigation panel with its icons at the bottom is there
+
+Full header
+
+Without requiring vertical scrolling.
+scrolling must only start from the vertical wording bottom navigation must not scroll.
+
+Match the proportions in the supplied reference image exactly.
+
+BACKGROUNDS
+
+Every page must have a cinematic background image.
+
+Home:
+
+Province-based dynamic background
+
+Explore:
+
+Adventure Zambia image
+
+Destinations:
+
+Victoria Falls / tourism image
+
+Bookings:
+
+Luxury lodge image
+
+Profile:
+
+Blurred Zambia landscape
+
+Use dark overlay for readability.
+
+GLASSMORPHISM
+
+All cards must use:
+
+Transparent glass backgrounds
+
+Backdrop blur
+
+Subtle white borders
+
+Zambia green glow accents
+
+Do not use flat dark rectangles.
+
+ANIMATIONS
+
+Use Framer Motion.
+
+Province change:
+
+1 second crossfade
+
+Background change:
+
+1 second crossfade
+
+Card expansion:
+
+Spring animation
+
+Card tap:
+
+Scale 0.97
+
+Card hover:
+
+Scale 1.03
+
+All transitions must feel Apple-quality and premium.
+
+The final result should match the supplied reference images as closely as possible and prioritize visual polish, cinematic backgrounds, glassmorphism, synchronized province-place navigation, and automatic carousel movement.
+
+This prompt specifically addresses every issue visible in your screenshot and tells Lovable exactly how to match the reference designs rather than just recreating the layout.
+
+
+so for now its mock they must be stored locally
+
+
+
+make sure the files and folder are arranged in a way they cam be used in uploaded to bolt.new and in v0.app as well
+
+the provinces cards, the provinces place cards and the pop up from the place cards must have a small "Book Now button" at top right corner.:
+
